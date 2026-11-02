@@ -32,10 +32,20 @@ An end-to-end analysis of Porsche's stock price history (Sept 2022 – Feb 2026)
 
 An ARIMA(1,1,1) model was fitted on the closing price (resampled to business-day frequency) and used to forecast the next 30 business days.
 
+![ARIMA forecast](images/porsche_arima_forecast.png)
+
 **Limitations (worth knowing):**
 - The AR and MA coefficients are not statistically significant (p > 0.3), so the model adds little over a naive random-walk forecast.
 - Residual diagnostics show heavy tails (kurtosis about 7.4) and heteroskedasticity, which ARIMA does not model. A GARCH-type model would suit volatility better.
 - This is a learning project, **not financial advice**.
+
+## Visualisations
+
+| Price trend & moving averages | Trading volume |
+|---|---|
+| ![Trend](images/porsche_trend_eda.png) | ![Volume](images/porsche_volume_chart.png) |
+
+![Price distribution](images/porsche_price_distribution.png)
 
 ## Power BI Dashboard
 
@@ -52,7 +62,15 @@ The dashboard (`dashboard/Porsche_Stock_Analysis.pbix`) includes:
 ## Repository Structure
 
 ```
-
+Porsche-Stock-Analysis/
+│
+├── images/                          # Dashboard screenshots used in the README
+│
+├── porsche_stock_data.csv           # Raw historical stock data
+├── porsche_stock_cleaned.csv        # Cleaned dataset with engineered features
+├── porsche_stock_analysis.ipynb     # Python notebook: cleaning, EDA, moving averages, returns
+├── Porsche_Stock_Analysis.pbix      # Power BI dashboard file
+└── README.md                        # Project overview and documentation
 ```
 
 ## How to Run
@@ -64,7 +82,7 @@ pip install -r requirements.txt
 jupyter notebook notebooks/porsche_stock_analysis.ipynb
 ```
 
-Run the notebook from the `notebooks/` folder so the relative paths resolve correctly.
+Run the notebook from the `notebooks/` folder so the relative paths (`../data/`, `../images/`) resolve correctly.
 
 ## Tech Stack
 
@@ -74,7 +92,3 @@ Python · pandas · NumPy · matplotlib · seaborn · statsmodels · Jupyter · 
 
 **Ayush Yadav** – Aspiring Data Analyst
 [LinkedIn](https://linkedin.com/in/ayush-yadav-914246198)
-
-## License
-
-Released under the [MIT License](LICENSE).
